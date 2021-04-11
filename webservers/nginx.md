@@ -74,3 +74,35 @@ server {
         ......
 }
 ```
+
+### nginx secure link with timeout
+
+nginx block:
+```
+location /box/para { #file storage path
+        secure_link $arg_hash,$arg_tmz; # ?hash, ?tmz
+        secure_link_md5 "$secure_link_expires$uri SecRetStrIng76";
+
+        if ($secure_link = "") { return 403; }
+        if ($secure_link = "0") { return 410; }
+        
+        location ~* ^.+\.(mp3|pdf|mp4|3gp)$ {
+                add_header 'Content-Type' "application/octet-stream";
+                add_header Content-disposition "attachment; filename=$1"; # Experiment with headers. Some headers make the secure link useless
+        }
+}
+```
+
+php link builder:
+```
+function buildSecureLink($baseUrl, $path, $secret = 'SecRetStrIng76', $ttl = 300)
+{
+        $expires = time() + $ttl;
+        $md5 = md5("{$expires}{$path} {$secret}", true);
+        $md5 = base64_encode($md5);
+        $md5 = strtr($md5, '+/', '-_'); 
+        $md5 = str_replace('=', '', $md5); 
+        
+        return "{$baseUrl}{$path}?hash={$md5}&tmz={$expires}";
+}
+```
