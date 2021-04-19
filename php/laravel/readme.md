@@ -28,4 +28,19 @@ public function boot()
 
 ##### insert() doesn't check for types, won't fill in timestamps
 
-## Better-do
+## Eloquent/Sql
+
+#### [Eager loading sum of a column from relationship](https://stackoverflow.com/a/50417277/2923388)
+```php
+$pumps = Pump::whereIn('unite_id', $unites)
+                    ->withCount(['sessions' => function($query){
+                        $query->select( DB::raw( "COALESCE(SUM(payable),0)" ) );
+                      },
+                      'payments' => function($query){
+                        $query->select( DB::raw( "COALESCE(SUM(amount),0)" ) );
+                      }
+                     ])
+                    ->get();
+```
+Available in loop with `->sessions_count` and `->payments_count` . Use alias in `withCount` if multiple counts/sums are required from the same relation.
+
