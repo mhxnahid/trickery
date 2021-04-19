@@ -19,6 +19,26 @@ Generate a `.jks` file using Android Studio.
 
 ### CLI
 
+##### CLI to run demands bunch of PATH variables:
+```
+export ANDROID_SDK="$HOME/Android/Sdk"
+export ANDROID_SDK_ROOT="$ANDROID_SDK"
+export ANDROID_HOME="$ANDROID_SDK"
+export JAVA_PATH="$HOME/projects/android-studio/jre/bin"
+export PATH="$HOME/.local/bin:$JAVA_PATH:$ANDROID_HOME:$ANDROID_SDK_ROOT:$ANDROID_SDK:$ANDROID_SDK/platform-tools:$PATH"
+```
+
+To run in android:
+```
+npm run start --reset-cache
+```
+In another window:
+```
+npm run android
+```
+Keep the emulator running. Press `rr` on the app to reload even on errors. Sometimes cache can get stuck. Follow the CLI instructions.
+
+### Build
 1. Generate keystore file
 ```
 badcDrawerNative/android$ keytool -genkeypair -v -storetype PKCS12 -keystore my-upload-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
