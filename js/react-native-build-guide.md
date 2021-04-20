@@ -78,10 +78,37 @@ android {
 }
 ...
 ```
-4. Build
+4. Build (release)
 ```
 badcDrawerNative/android$ ./gradlew bundleRelease
 ```
 
 Generates `./android/app/build/outputs/bundle/release/app.aab` (to publish in play store) and the debug apk is in `./android/app/build/outputs/apk/debug/ap-debug.apk`
 
+5. Build (Debug): Bundle has to be generated before building
+```
+badcDrawerNative$ react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+```
+
+```
+badcDrawerNative/android$ ./gradlew assembleDebug
+```
+
+6. Build Settings:  
+* `./app.js` change `displayName`  
+* `android/app/src/main/res/values/strings.xml` change `app_name` (in case it's already generated)  
+* Icons go into the folders: `/android/app/src/main/res` > `mipmap-hdpi` `mipmap-mdpi` `mipmap-xhdpi` `mipmap-xxdpi` `mipmap-xxxdpi`
+* Icons can be generated in Android Studio using the `Image Asset` tool. Search for it.
+* Separate build apk files and enabling proguard will reduce app size by a lot
+```
+nano ./android/app/build.gradle
+
+....
+def enableSeparateBuildPerCPUArchitecture = true
+
+/**
+ * Run Proguard to shrink the Java bytecode in release builds.
+ */
+def enableProguardInReleaseBuilds = true
+....
+```
