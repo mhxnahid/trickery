@@ -1,8 +1,3 @@
-#### [Hop around cursor positions](https://stackoverflow.com/questions/35424367/how-to-navigate-back-to-the-last-cursor-position-in-visual-studio-code)
-Ctrl+Alt+- .. navigate back
-
-Ctrl+Shift+- .. navigate forward
-
 #### [Match selection with `Ctrl+D`](https://stackoverflow.com/a/11623548/2923388)
 
 You can press `Ctrl+K` and `Ctrl+D` at the same time to skip a selection. If you went too far with your selection, you can use `Ctrl+U` to return to a previous selection.
