@@ -1,4 +1,11 @@
+## How-do
+
 ## Quirks
+
+##### $this->middleware('name') has to be used within __construct() in a controller. It doesn't work in a controller method. Use Gate::authorize() or $this->authorize()
+
+## Eloquent/Sql
+
 ##### Empty timestamps array in eloquent results in 00-00-00 in timestamp fields (created_at, updated_at)
 
 ```php
@@ -27,8 +34,6 @@ public function boot()
 ```
 
 ##### insert() doesn't check for types, won't fill in timestamps
-
-## Eloquent/Sql
 
 #### [Eager loading sum of a column from relationship](https://stackoverflow.com/a/50417277/2923388)
 ```php
