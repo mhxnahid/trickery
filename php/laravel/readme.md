@@ -2,7 +2,7 @@
 
 ## Quirks
 
-##### $this->middleware('name') has to be used within __construct() in a controller. It doesn't work in a controller method. Use Gate::authorize() or $this->authorize()
+##### `$this->middleware('name')` has to be used within `__construct()` in a controller. It doesn't work in a controller method. Use `Gate::authorize()` or `$this->authorize()`
 
 ## Eloquent/Sql
 
