@@ -16,7 +16,6 @@ use Illuminate\Console\Command;
 
 class SystemService
 {
-    private $makedir;
     private $context;
 
     /** @param $context console-instance */
