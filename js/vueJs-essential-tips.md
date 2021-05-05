@@ -41,3 +41,6 @@ computed: {
 ```
 
 [SO Answer](https://stackoverflow.com/questions/37078423/how-can-add-bootstrap-tooltip-inside-vue-js)
+
+
+### Transition with v-show [Fiddle](http://jsfiddle.net/eywraw8t/355190/)
