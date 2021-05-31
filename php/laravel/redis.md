@@ -31,7 +31,7 @@ In my ubuntu 20.04 machine phpredis sub timeout can't be set to 0, but 60 * 60 *
 TIP: Use predis library, phpredis pecl extension lacks debugging (or I have not turned on exceptions)
 
 #### pubsub quirks
-When the subscription callback and the job dispatch uses the same redis connection, it throws an error (predis, phpredis fails silently).
+When the subscription callback and the job dispatch uses the same redis connection, it throws an error with predis (phpredis fails silently).
 ```php
 ERR only (P)SUBSCRIBE / (P)UNSUBSCRIBE / PING / QUIT allowed in this context
 
