@@ -19,7 +19,7 @@
             'password' => env('REDIS_PASSWORD', null),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'),
-            'read_timeout' => 60 * 24 * 7 * 30, //phpredis
+            'read_timeout' => 60 * 60 * 24 * 30 * 12, //phpredis
             'read_write_timeout' => 0, // predis
         ],
 
