@@ -1,0 +1,256 @@
+`/etc/ssh/sshd_config`
+```
+PermitRootLogin yes
+PasswordAuthentication yes
+```
+
+`service ssh reload`\
+`service sshd reload`
+
+```
+apt update
+apt upgrade
+apt dist-upgrade
+apt install ranger htop mc ncdu ufw acl git
+```
+```
+ufw allow ssh
+ufw allow http
+ufw allow https
+systemctl enable ufw
+```
+```
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb
+dpkg -i mysql-apt-config_0.8.17-1_all.deb
+apt install mysql-server
+mysql_secure_installation
+```
+```
+apt remove --purge apache2
+apt install php7.4-fpm
+apt install php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,xml}
+```
+```
+#wget from https://www.phpmyadmin.net/downloads/
+
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
+tar -zxvf phpMyAdmin-*-all-languages.tar.gz
+sudo mv phpMyAdmin-*-all-languages /usr/share/phpmyadmin
+sudo cp -pr /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpMyAdmin/config.inc.php
+```
+```
+#generate blowfish_secret https://phpsolved.com/phpmyadmin-blowfish-secret-generator/
+
+/usr/share/phpMyAdmin/config.inc.php
+```
+`$cfg['blowfish_secret'] = 'CfX1la/aG83gx1{7rADus,iqz8RzeV8x'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */`
+
+#### uncomment
+
+```
+/**
+ * phpMyAdmin configuration storage settings.
+ */
+
+/* User used to manipulate with storage */
+$cfg['Servers'][$i]['controlhost'] = 'localhost';
+// $cfg['Servers'][$i]['controlport'] = '';
+$cfg['Servers'][$i]['controluser'] = 'pma';
+$cfg['Servers'][$i]['controlpass'] = 'pmapass';
+
+/* Storage database and tables */
+$cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
+$cfg['Servers'][$i]['bookmarktable'] = 'pma__bookmark';
+$cfg['Servers'][$i]['relation'] = 'pma__relation';
+$cfg['Servers'][$i]['table_info'] = 'pma__table_info';
+$cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
+$cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
+$cfg['Servers'][$i]['column_info'] = 'pma__column_info';
+$cfg['Servers'][$i]['history'] = 'pma__history';
+$cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
+$cfg['Servers'][$i]['tracking'] = 'pma__tracking';
+$cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';
+$cfg['Servers'][$i]['recent'] = 'pma__recent';
+$cfg['Servers'][$i]['favorite'] = 'pma__favorite';
+$cfg['Servers'][$i]['users'] = 'pma__users';
+$cfg['Servers'][$i]['usergroups'] = 'pma__usergroups';
+$cfg['Servers'][$i]['navigationhiding'] = 'pma__navigationhiding';
+$cfg['Servers'][$i]['savedsearches'] = 'pma__savedsearches';
+$cfg['Servers'][$i]['central_columns'] = 'pma__central_columns';
+$cfg['Servers'][$i]['designer_settings'] = 'pma__designer_settings';
+$cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
+```
+
+```
+sudo mysql < /usr/share/phpMyAdmin/sql/create_tables.sql -u root -p
+sudo mysql -u root -p
+> SELECT USER from mysql.user;
+> CREATE USER 'pma'@'localhost' IDENTIFIED BY 'password';
+> GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost';
+> CREATE USER 'els'@'localhost' IDENTIFIED BY 'password';
+> GRANT ALL PRIVILEGES ON *.* TO 'pma'@'localhost';
+> FLUSH PRIVILEGES;
+```
+```
+sudo chown -R www-data:www-data /usr/share/phpmyadmin
+```
+```
+adduser els
+```
+```
+#get latest from https://getcomposer.org/download/
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+sudo mv composer.phar /usr/local/bin/composer
+php composer-setup.php
+sudo mv composer.phar /usr/local/bin/composer
+```
+```
+curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+```
+```
+setfacl -Rdm u:www-data:rwx,u:els:rwx html
+setfacl -Rm u:www-data:rwx,u:els:rwx html
+```
+
+`/etc/ranger/config/rc.conf [mod]`
+```
+set column_ratios 1,4,2
+set show_hidden true
+set vcs_aware true
+```
+
+`/etc/nginx/nginx.conf`
+```
+#http block
+index index.php index.htm index.html;
+```
+
+`/etc/nginx/sites-avaialble/default`
+```
+server{
+    include snippets/listenport.conf;
+
+    server_name mopas.friendstech.net;
+
+    root /var/www/html/mopas/mopas-laravel/public;
+
+    include snippets/generic-laravel.conf;
+}
+```
+
+`/etc/nginx/snippets/phpmyadmin.conf`
+```
+location /phpmyadmin {
+    root /usr/share/;
+    index index.php index.html index.htm;
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+        try_files $uri =404;
+        root /usr/share/;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+    }
+
+    location ~* ^/phpmyadmin/(.+\.(jpg|jpeg|gif|css|png|js|ico|html|xml|txt))$ {
+        root /usr/share/;
+    }
+}
+```
+
+`/etc/nginx/snippets/listenport.conf`
+```
+listen 80 default_server;
+listen [::]:80 default_server;
+
+listen 443 ssl default_server;
+listen [::]:443 ssl default_server;
+```
+
+`.nanorc`
+```
+# Non-default settings
+set atblanks        # wrap line at blanks.
+set cutfromcursor   # CTRL+K cuts from cursor position to end of line.
+set nohelp          # Disable the help information (CTRL+G to view the help screen).
+set softwrap        # Enable softwrap of lines.
+set suspend         # Enables CTRL+Z to suspend nano.
+set tabsize 4       # Sets tab-to-spaces size to 4.
+set tabstospaces    # Converts TAB key press to spaces.
+include "/usr/share/nano/*.nanorc" # Enables the syntax highlighting.
+set speller "aspell -x -c"         # Sets what spelling utility to use.
+set constantshow    # Displays useful information e.g. line number and position in the bottom bar.
+#set linenumbers     # Lines are numbered.
+set casesensitive   # Case insensitive search.
+set historylog      # Save the last 100 history searches for later use.
+set positionlog     # Saves the cursor position between editing sessions.
+set zap             # Allows you to highlight text (CTRL+SHIFT+ARROW) and delete it with backspace.
+#set autoindent      # A new line will have the same number of leading spaces as the previous one.
+#set indicator       # Displays a scroll bar on the right that shows the position and size of the current view port.
+#set minibar         # Displays file name and other information in the bottom bar. Removes top bar.
+
+# Enable and set a working backup directory
+#set backup                              # Creates backups of your current file.
+#set backupdir "~/.cache/nano/backups/"  # The location of the backups.
+
+# Shortcut key bindings
+bind ^C copy main       # CTRC+C - Copy
+bind ^V paste all       # CTRL+V - Past
+bind ^F whereis all     # CTRL+F - Find
+bind ^S savefile main   # CTRL+S - Save 
+```
+
+
+### USER (els):
+```
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+nvm install node
+```
+```
+ssh-keygen -t rsa -b 4096 -C "mhnahid@live.com"
+#deploy key
+cat /home/els/.ssh/id_rsa.pub
+```
+```
+git clone git@github.com:x/x.git
+```
+
+`.bashrc`
+```
+alias art="php artisan" #artisan alias
+alias artsf="art migrate:refresh --seed" #seed with total rollback
+alias gp="git pull"
+```
+
+`.nanorc`
+```
+set softwrap        # Enable softwrap of lines.
+set suspend         # Enables CTRL+Z to suspend nano.
+set tabsize 4       # Sets tab-to-spaces size to 4.
+set tabstospaces    # Converts TAB key press to spaces.
+include "/usr/share/nano/*.nanorc" # Enables the syntax highlighting.
+set speller "aspell -x -c"         # Sets what spelling utility to use.
+set constantshow    # Displays useful information e.g. line number and position in the bottom bar.
+set linenumbers     # Lines are numbered.
+set casesensitive   # Case insensitive search.
+set historylog      # Save the last 100 history searches for later use.
+set positionlog     # Saves the cursor position between editing sessions.
+set zap             # Allows you to highlight text (CTRL+SHIFT+ARROW) and delete it with backspace.
+set autoindent      # A new line will have the same number of leading spaces as the previous one.
+#set indicator       # Displays a scroll bar on the right that shows the position and size of the current view port.
+#set minibar         # Displays file name and other information in the bottom bar. Removes top bar.
+
+# Enable and set a working backup directory
+#set backup                              # Creates backups of your current file.
+#set backupdir "~/.cache/nano/backups/"  # The location of the backups.
+
+# Shortcut key bindings
+bind ^C copy main       # CTRC+C - Copy
+bind ^V paste all       # CTRL+V - Past
+bind ^F whereis all     # CTRL+F - Find
+bind ^S savefile main   # CTRL+S - Save
+```
