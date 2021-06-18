@@ -1,3 +1,4 @@
+### ssh
 `/etc/ssh/sshd_config`
 ```
 PermitRootLogin yes
@@ -7,29 +8,34 @@ PasswordAuthentication yes
 `service ssh reload`\
 `service sshd reload`
 
+### update
 ```
 apt update
 apt upgrade
 apt dist-upgrade
-apt install ranger htop mc ncdu ufw acl git
+apt install ranger htop mc ncdu ufw acl git logrotate
 ```
+### ufw
 ```
 ufw allow ssh
 ufw allow http
 ufw allow https
 systemctl enable ufw
 ```
+### mysql
 ```
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.17-1_all.deb
 dpkg -i mysql-apt-config_0.8.17-1_all.deb
 apt install mysql-server
 mysql_secure_installation
 ```
+### php-fpm
 ```
 apt remove --purge apache2
 apt install php7.4-fpm
 apt install php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,xml}
 ```
+### phpmyadmin
 ```
 #wget from https://www.phpmyadmin.net/downloads/
 
@@ -38,16 +44,13 @@ tar -zxvf phpMyAdmin-*-all-languages.tar.gz
 sudo mv phpMyAdmin-*-all-languages /usr/share/phpmyadmin
 sudo cp -pr /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpMyAdmin/config.inc.php
 ```
+`/usr/share/phpMyAdmin/config.inc.php`
 ```
 #generate blowfish_secret https://phpsolved.com/phpmyadmin-blowfish-secret-generator/
+$cfg['blowfish_secret'] = 'CfX1la/aG83gx1{7rADus,iqz8RzeV8x'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
-/usr/share/phpMyAdmin/config.inc.php
-```
-`$cfg['blowfish_secret'] = 'CfX1la/aG83gx1{7rADus,iqz8RzeV8x'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */`
 
-#### uncomment
-
-```
+# uncomment
 /**
  * phpMyAdmin configuration storage settings.
  */
@@ -94,9 +97,11 @@ sudo mysql -u root -p
 ```
 sudo chown -R www-data:www-data /usr/share/phpmyadmin
 ```
+### add user
 ```
 adduser els
 ```
+### composer
 ```
 #get latest from https://getcomposer.org/download/
 
@@ -106,23 +111,25 @@ sudo mv composer.phar /usr/local/bin/composer
 php composer-setup.php
 sudo mv composer.phar /usr/local/bin/composer
 ```
+### openvpn
 ```
 curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
 chmod +x openvpn-install.sh
 ./openvpn-install.sh
 ```
+### acl (preferebly only on storage and cache)
 ```
 setfacl -Rdm u:www-data:rwx,u:els:rwx html
 setfacl -Rm u:www-data:rwx,u:els:rwx html
 ```
-
+### ranger config
 `/etc/ranger/config/rc.conf [mod]`
 ```
 set column_ratios 1,4,2
 set show_hidden true
 set vcs_aware true
 ```
-
+### nginx
 `/etc/nginx/nginx.conf`
 ```
 #http block
@@ -170,7 +177,21 @@ listen [::]:80 default_server;
 listen 443 ssl default_server;
 listen [::]:443 ssl default_server;
 ```
-
+### logrotate
+`/etc/logrotate.d/els`
+```
+/var/www/html/laravel/storage/logs/*.log {
+    daily
+    missingok
+    rotate 12
+    notifempty
+    su stream stream
+    postrotate
+    /usr/bin/setfacl -m u:els:rwx,u:www-data:rwx /var/www/html/laravel/storage/logs/*.log
+    endscript
+}
+```
+### nano config
 `.nanorc`
 ```
 # Non-default settings
@@ -205,27 +226,30 @@ bind ^S savefile main   # CTRL+S - Save
 ```
 
 
-### USER (els):
+## USER (els):
+### nvm
 ```
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 nvm install node
 ```
+### ssh key
 ```
 ssh-keygen -t rsa -b 4096 -C "mhnahid@live.com"
 #deploy key
 cat /home/els/.ssh/id_rsa.pub
 ```
+### git clone
 ```
 git clone git@github.com:x/x.git
 ```
-
+### bashrc
 `.bashrc`
 ```
 alias art="php artisan" #artisan alias
 alias artsf="art migrate:refresh --seed" #seed with total rollback
 alias gp="git pull"
 ```
-
+### nano
 `.nanorc`
 ```
 set softwrap        # Enable softwrap of lines.
