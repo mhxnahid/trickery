@@ -234,7 +234,7 @@ nvm install node
 ```
 ### ssh key
 ```
-ssh-keygen -t rsa -b 4096 -C "mhnahid@live.com"
+ssh-keygen -t rsa -b 4096 -C "mhn@li.com"
 #deploy key
 cat /home/els/.ssh/id_rsa.pub
 ```
