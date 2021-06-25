@@ -1,3 +1,17 @@
+### Update list after an item has been updated onChange or something like that
+Here w're using `Vue.set()` to find the array element and replace it with the response received from api call. 
+```
+update(id, post){
+  axios
+    .patch(this.urlb(`${routes.staff.appointments}${id}`), post)
+    .then(({data}) => 
+      {
+        this.$set(this.records, this.records.findIndex(r => r.id ==  id), data)
+      })
+    .catch((err) => console.error(err.response.data))
+}
+```
+
 ### Re-render on route change within the same component - watch $route or $key
 ```html
     <router-view :key="$route.fullPath"></router-view>
