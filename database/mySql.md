@@ -1,4 +1,9 @@
-#### Timestamp converts input to UTC, datetime doesn't do that.
+#### Timestamp/datetime 
+timestamp converts input from session time to UTC (system time), datetime doesn't do that.\
+timestamp max year is 2038, datetime 9999\
+timestamp queries are cached, datetime not\
+timestamp fields can be indexed, datetime not\
+
 
 #### Concat a column's value as string
 ```sql
