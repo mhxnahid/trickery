@@ -1,6 +1,6 @@
 ### Update list after an item has been updated onChange or something like that
 Here w're using `Vue.set()` to find the array element and replace it with the response received from api call. 
-```
+```js
 update(id, post){
   axios
     .patch(this.urlb(`${routes.staff.appointments}${id}`), post)
