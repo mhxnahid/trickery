@@ -17,6 +17,9 @@ docker images -a
 #Remove all images
 docker rmi $(docker images -a -q)
 
+#List all containers
+docker ps -a
+
 #Remove all unused(?) containers
 docker system prune
 
