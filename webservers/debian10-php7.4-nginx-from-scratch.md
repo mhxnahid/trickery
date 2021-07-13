@@ -13,7 +13,7 @@ PasswordAuthentication yes
 apt update
 apt upgrade
 apt dist-upgrade
-apt install ranger htop mc ncdu ufw acl git logrotate
+apt install ranger htop mc ncdu ufw acl git logrotate fail2ban
 ```
 ### ufw
 ```
