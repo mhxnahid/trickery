@@ -37,6 +37,17 @@ function ranger {
 }
 ```
 
+### /etc/fail2ban/jail.local
+```
+[ssh]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 600
+```
+
 ### ufw
 ```
 ufw allow ssh
