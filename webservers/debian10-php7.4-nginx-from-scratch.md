@@ -75,7 +75,7 @@ apt install php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,xml}
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 tar -zxvf phpMyAdmin-*-all-languages.tar.gz
 sudo mv phpMyAdmin-*-all-languages /usr/share/phpmyadmin
-sudo cp -pr /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpMyAdmin/config.inc.php
+sudo cp -pr /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 ```
 `/usr/share/phpMyAdmin/config.inc.php`
 ```
