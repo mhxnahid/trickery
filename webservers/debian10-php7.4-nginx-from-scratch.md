@@ -13,8 +13,30 @@ PasswordAuthentication yes
 apt update
 apt upgrade
 apt dist-upgrade
-apt install ranger htop mc ncdu ufw acl git logrotate fail2ban
+apt install ranger htop mc ncdu ufw acl git logrotate fail2ban highlight
 ```
+### /etc/bash.bashrc
+```bash
+alias mc='. /usr/lib/mc/mc-wrapper.sh'
+alias r="ranger"
+
+function ranger {
+	local IFS=$'\t\n'
+	local tempfile="$(mktemp -t tmp.XXXXXX)"
+	local ranger_cmd=(
+		command
+		ranger
+		--cmd="map Q chain shell echo %d > "$tempfile"; quitall"
+	)
+	
+	${ranger_cmd[@]} "$@"
+	if [[ -f "$tempfile" ]] && [[ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]]; then
+		cd -- "$(cat "$tempfile")" || return
+	fi
+	command rm -f -- "$tempfile" 2>/dev/null
+}
+```
+
 ### ufw
 ```
 ufw allow ssh
