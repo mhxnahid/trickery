@@ -237,6 +237,12 @@ nvm install node
 ssh-keygen -t rsa -b 4096 -C "mhn@li.com"
 #deploy key
 cat /home/els/.ssh/id_rsa.pub
+
+#authorize key for ssh login
+#copy id_rsa.pub to /home/els/.ssh/authorized_keys
+chmod 700 .ssh
+chmod 700 authorized_keys
+#user the private key to login
 ```
 ### git clone
 ```
