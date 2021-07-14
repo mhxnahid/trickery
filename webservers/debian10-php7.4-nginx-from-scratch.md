@@ -126,8 +126,17 @@ sudo mysql -u root -p
 > CREATE USER 'els'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 > GRANT ALL PRIVILEGES ON *.* TO 'els'@'localhost';
 > FLUSH PRIVILEGES;
-> SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+> SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY','')); #STRICT_TRANS_TABLES is another offender
 ```
+easier @@sql_mode solution:
+```
+/etc/mysql/mysql.conf.d/mysqld.cnf (debian10)
+
+[mysqld]
+...
+sql_mode        = NO_ENGINE_SUBSTITUTION
+```
+
 ```
 sudo chown -R www-data:www-data /usr/share/phpmyadmin
 ```
