@@ -1,4 +1,4 @@
-### ssh
+### ssh (if pass auth is required)
 `/etc/ssh/sshd_config`
 ```
 PermitRootLogin yes
