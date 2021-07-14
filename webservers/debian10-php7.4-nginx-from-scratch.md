@@ -77,7 +77,7 @@ tar -zxvf phpMyAdmin-*-all-languages.tar.gz
 sudo mv phpMyAdmin-*-all-languages /usr/share/phpmyadmin
 sudo cp -pr /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
 ```
-`/usr/share/phpMyAdmin/config.inc.php`
+`/usr/share/phpmyadmin/config.inc.php`
 ```
 #generate blowfish_secret https://phpsolved.com/phpmyadmin-blowfish-secret-generator/
 $cfg['blowfish_secret'] = 'CfX1la/aG83gx1{7rADus,iqz8RzeV8x'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
@@ -180,6 +180,30 @@ server{
 
     include snippets/generic-laravel.conf;
 }
+```
+
+`/etc/nginx/snippets/generic-laravel.conf`
+```
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    error_page 404 /index.php;
+
+    location = /index.php {
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    include snippets/phpmyadmin.conf;
 ```
 
 `/etc/nginx/snippets/phpmyadmin.conf`
