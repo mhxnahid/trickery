@@ -126,6 +126,7 @@ sudo mysql -u root -p
 > CREATE USER 'els'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 > GRANT ALL PRIVILEGES ON *.* TO 'els'@'localhost';
 > FLUSH PRIVILEGES;
+> SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 ```
 ```
 sudo chown -R www-data:www-data /usr/share/phpmyadmin
