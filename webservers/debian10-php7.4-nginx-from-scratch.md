@@ -118,13 +118,13 @@ $cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
 ```
 
 ```
-sudo mysql < /usr/share/phpMyAdmin/sql/create_tables.sql -u root -p
+sudo mysql < /usr/share/phpmyadmin/sql/create_tables.sql -u root -p
 sudo mysql -u root -p
 > SELECT USER from mysql.user;
-> CREATE USER 'pma'@'localhost' IDENTIFIED BY 'password';
+> CREATE USER 'pma'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 > GRANT ALL PRIVILEGES ON phpmyadmin.* TO 'pma'@'localhost';
-> CREATE USER 'els'@'localhost' IDENTIFIED BY 'password';
-> GRANT ALL PRIVILEGES ON *.* TO 'pma'@'localhost';
+> CREATE USER 'els'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+> GRANT ALL PRIVILEGES ON *.* TO 'els'@'localhost';
 > FLUSH PRIVILEGES;
 ```
 ```
