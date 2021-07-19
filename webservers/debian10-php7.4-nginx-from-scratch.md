@@ -66,7 +66,7 @@ mysql_secure_installation
 ```
 apt remove --purge apache2
 apt install php7.4-fpm
-apt install php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,xml}
+apt install php7.4-{bcmath,bz2,intl,gd,mbstring,mysql,zip,xml,curl}
 ```
 ### phpmyadmin
 ```
