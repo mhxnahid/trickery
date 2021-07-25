@@ -1,4 +1,5 @@
 ### nginx 504 timeout with load balancer
+increasing the timeout in php-fpm & nginx configs didn't solve the issue, we were getting 504 exactly after 60s
 https://serverfault.com/questions/703311/cant-increase-timeout-on-nginx-with-php-fpm
 ```
 So, if somebody else has that problem and can't find an answer, here is my fix, after 2 more hours of searching.
