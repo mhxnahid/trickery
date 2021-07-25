@@ -244,6 +244,22 @@ listen [::]:80 default_server;
 listen 443 ssl default_server;
 listen [::]:443 ssl default_server;
 ```
+### in case of long php processes
+```
+#/etc/nginx/sites-available/default
+
+location = /index.php {
+	....
+	fastcgi_read_timeout 360;
+}
+```
+
+```
+#/etc/php/7.4/fpm/php.ini
+
+max_execution_time = 360
+```
+
 ### logrotate
 `/etc/logrotate.d/els`
 ```
