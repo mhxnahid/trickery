@@ -1,3 +1,38 @@
+### Global event emitter
+
+```js
+//main.js
+import Vue from "vue";
+import App from "./App.vue";
+
+Vue.prototype.$bus = new Vue();
+
+new Vue({
+  render: h => h(App)
+})
+.$mount("#app");
+```
+
+```vue
+//App.vue
+<template>
+  <div id="app">
+    <button @click="$bus.$emit('record-create', { created: true })">Create Record</button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "App",
+  mounted() {
+    this.$bus.$on("record-create", (data) => {
+      console.log("record-create", data);
+    });
+  },
+};
+</script>
+```
+
 ### Update list after an item has been updated onChange or something like that
 Here w're using `Vue.set()` to find the array element and replace it with the response received from api call. 
 ```js
