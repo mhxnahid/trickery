@@ -1,3 +1,23 @@
+### Shallow copy objects while assigning to data() to avoid mutations
+```js
+<script>
+const PERSON = {name: ''}
+
+export default {
+  data() {
+    return {
+      person: [{...PERSON}]
+    }
+  },
+  methods: {
+    addPerson(){
+      this.person.push({...PERSON})
+    }
+  }
+};
+</script>
+```
+
 ### Global event emitter
 
 ```js
