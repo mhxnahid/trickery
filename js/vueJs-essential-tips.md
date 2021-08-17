@@ -17,7 +17,7 @@ export default {
 };
 </script>
 ```
-PS: using a prototype is not required. `this.$root.$emit()` and `this.$root.$on()` can be used.
+
 
 ### Global event emitter
 
@@ -53,6 +53,7 @@ export default {
 };
 </script>
 ```
+PS: using a prototype is not required. `this.$root.$emit()` and `this.$root.$on()` can be used.
 
 ### Update list after an item has been updated onChange or something like that
 Here w're using `Vue.set()` to find the array element and replace it with the response received from api call. 
