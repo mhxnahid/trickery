@@ -17,6 +17,7 @@ export default {
 };
 </script>
 ```
+PS: using a prototype is not required. `this.$root.$emit()` and `this.$root.$on()` can be used.
 
 ### Global event emitter
 
