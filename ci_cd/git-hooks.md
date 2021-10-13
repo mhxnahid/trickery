@@ -30,5 +30,5 @@ npm i
 Add local machine public key to server's `~/.ssh/authorized_keys` manually or using `ssh-copy-id` OR add a config in local machine's `~/.ssh/config` specifying which local public key to use
 ```bash
 git remote add deploy user@ip:/var/www/html/git-server/repo.git
-git remote deploy master
+git push deploy master
 ```
