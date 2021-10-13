@@ -20,6 +20,7 @@ export NODE_VERSION="16"
 
 git checkout -f
 
+# bash can't get npm location if vnm is used
 . $HOME/.nvm/nvm.sh
 nvm use $NODE_VERSION
 
