@@ -6,10 +6,10 @@ init a nodejs project using this image
 ```console
 # -it runs the command in shell mode
 # --rm removes the container instance once we're done running the command(s)
-# -u 1000:1000 ensures that package.json is not owned by root
+# -u $(id -u):$(id -g) ensures that resulting package.json is owned by host machine user (eg: 1000:1000), not by root
 # -v is mounting host directory to container's /app 
 # -w is setting the working directory to /app
-docker run -itu 1000:1000 --rm -v $(pwd):/app -w /app node:14-alpine npm init
+docker run -itu $(id -u):$(id -g)  --rm -v $(pwd):/app -w /app node:14-alpine npm init
 ```
 install dependencies
 ```console
