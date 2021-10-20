@@ -26,22 +26,22 @@ alias npm="docker run -itu $(id -u):$(id -g) --rm -v $(pwd):/app -w /app node:14
 ### Project Structure
 Dockerfile
 ```dockerfile
-#The image we're using. Don't use ambigious name like 'latest'
+# The image we're using. Don't use ambigious name like 'latest'
 FROM node:14-alpine
 
-#cd into /app in container
+# cd into /app in container
 WORKDIR /app
 
-#copy package.json into /app in container
+# copy package.json into /app in container
 COPY package.json .
 
-#if package.json has not changed, this step won't run
+# if package.json has not changed, this step won't run
 RUN npm install
 
-#now copy everything else
+# now copy everything else
 COPY . .
 
-#run the app
+# run the app
 CMD [ "npm", "run", "dev" ]
 ```
 docker-compose.yml
@@ -70,8 +70,8 @@ app.listen(process.env.HTTP_PORT, () => console.log(`Listening to port ${process
 ```
 accessing the running container
 ```console
-#list files using docker-compose (running container service name)
+# list files using docker-compose (running container service name)
 docker-compose run --rm  web ls
-#list files using docker run (running container name)
+# list files using docker run (running container name)
 docker run -it --rm -v $(pwd):/app -w /app nodejs_web ls
 ```
