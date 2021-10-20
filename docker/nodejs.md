@@ -75,7 +75,7 @@ docker-compose run --rm  web ls
 # list files using docker run (running container name)
 docker run -it --rm -v $(pwd):/app -w /app nodejs_web ls
 ```
-Every time package.json is updated, you have to run 
+Every time package.json is updated, you have to run (while restarting)
 ```console
 # build and up
 docker-compose up --build
