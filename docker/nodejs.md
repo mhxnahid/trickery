@@ -1,3 +1,4 @@
+### Init project
 Pull a node image
 ```console
 docker pull node:14-alpine
@@ -17,4 +18,60 @@ install dependencies
 docker run -it --rm -v $(pwd):/app -w /app node:14-alpine npm i express
 # or
 docker run -it --rm -v $(pwd):/app -w /app node:14-alpine npm i
+```
+Create an npm alias!
+```bash
+alias npm="docker run -itu $(id -u):$(id -g) --rm -v $(pwd):/app -w /app node:14-alpine"
+```
+### Project Structure
+Dockerfile
+```dockerfile
+#The image we're using. Don't use ambigious name like 'latest'
+FROM node:14-alpine
+
+#cd into /app in container
+WORKDIR /app
+
+#copy package.json into /app in container
+COPY package.json .
+
+#if package.json has not changed, this step won't run
+RUN npm install
+
+#now copy everything else
+COPY . .
+
+#run the app
+CMD [ "npm", "run", "dev" ]
+```
+docker-compose.yml
+```yml
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8082:8080"
+    environment:
+      - HTTP_PORT=8080
+```
+index.js
+```js
+const express = require('express');
+const app = express()
+
+app.get('/', (req, res) => {
+    res.json({'status': 200})
+})
+
+app.listen(process.env.HTTP_PORT, () => console.log(`Listening to port ${process.env.HTTP_PORT}`));
+```
+accessing the running container
+```console
+#list files using docker-compose (running container service name)
+docker-compose run --rm  web ls
+#list files using docker run (running container name)
+docker run -it --rm -v $(pwd):/app -w /app nodejs_web ls
 ```
