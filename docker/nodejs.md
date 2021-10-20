@@ -72,6 +72,8 @@ accessing the running container
 ```console
 # list files using docker-compose (running container service name)
 docker-compose run --rm  web ls
+# with docker-compose exec
+docker-compose exec -u $(id -u) web ls
 # list files using docker run (running container name)
 docker run -it --rm -v $(pwd):/app -w /app nodejs_web ls
 ```
