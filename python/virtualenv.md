@@ -9,6 +9,8 @@ virtualenv --python=py/bin/python3 envw
 source envw/bin/activate
 #check
 python -V
+which python
+whcih pip
 pip list
 #deactivate
 deactivate
