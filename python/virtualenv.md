@@ -1,4 +1,4 @@
-```console
+```bash
 #install
 pip3 install virtualenv
 #create env
