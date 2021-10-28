@@ -20,4 +20,5 @@ We're checking a video player page in tnaket[.]xyz. See the attached `pack.js`, 
 1522        if (isNaN(+_0x28deb3))
 ```
 
-The script is not easily readable as the variables, parameters and function names are replaced with a,b,C and _0x52454 using some sort of obfuscator
+The script is not easily readable as the variables, parameters and function names are replaced with a,b,C and _0x52454 using some sort of obfuscator\
+Last updated: 28th Oct 2021
