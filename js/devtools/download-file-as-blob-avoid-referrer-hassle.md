@@ -16,4 +16,4 @@ fetch("https://site.com/file/url?token=&expiry=")
             a.remove();  //afterwards we remove the element again         
         });
 ```
-Alternative: Create a link/ edit an existing link using the element editor and click that link to pass referrer check.
+Alternative: Create a link/ edit an existing link using the element editor and click that link to pass referrer check (to watch).
