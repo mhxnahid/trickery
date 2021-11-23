@@ -22,5 +22,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 # create docker group
 sudo groupadd docker
 # add an user to the group
-sudo usermod -aG docker [non-root user]
+sudo usermod -aG docker <non-root_user>
 ```
