@@ -21,7 +21,7 @@ xdebug.remote_log = /tmp/xdebug_remote.log
 xdebug.remote_mode = req
 xdebug.remote_port = 9003
 ```
-```
+```json
 // Sample project/.vscode/launch.json
 
 {
