@@ -73,3 +73,88 @@ xdebug.remote_port = 9003
     ]
 }
 ```
+
+### Docker (ubuntu 20.04 host) + vscode
+```yml
+version: '3'
+
+networks:
+  laravel:
+
+services:
+  site:
+    build:
+      context: ./dockerfiles
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - php
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+    container_name: php
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - laravel
+```
+
+```Dockerfile
+# ./dockerfiles/php.dockerfile
+FROM php:8.0-fpm-alpine
+
+# install xdebug
+RUN set -xe && \
+        docker-php-source extract && \
+        apk add --no-cache --virtual .build-deps \
+            autoconf \
+            g++ \
+            make \
+        && \
+        pecl install xdebug && \
+        docker-php-ext-enable xdebug && \
+        docker-php-source delete && \
+        apk del .build-deps
+
+COPY ./xdebug.ini /usr/local/etc/php/conf.d/
+
+CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
+
+```
+
+```ini
+# .dockerfiles/xdebug.ini
+zend_extension=xdebug.so
+xdebug.mode=develop,debug
+xdebug.client_port=9004
+xdebug.idekey=VSCODE
+xdebug.discover_client_host=1
+xdebug.start_with_request=yes
+```
+
+```json
+// .vscode/launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "log": true,
+            "port": 9004,
+            "pathMappings": {
+                "/var/www/html": "${workspaceFolder}"
+            }
+        }
+    ]
+}
+```
