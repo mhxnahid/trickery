@@ -74,6 +74,12 @@ xdebug.remote_port = 9003
 }
 ```
 
+```php
+<?php
+// debug
+xdebug_info();
+```
+
 ### Docker (ubuntu 20.04 host) + vscode
 ```yml
 version: '3'
