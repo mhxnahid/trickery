@@ -96,9 +96,13 @@ services:
     volumes:
       - "./src:/app"
 ```
-```
+```sh
 # add venv, it'll now be visible in host ./src
 docker-compose run --rm web python -m venv venv
 # should return venv path
 docker-compose run --rm web which python
+# install, create stuff, do stuff, have fun
+docker-compose run --rm web pip install -r requirements.txt
+# installed commands should work
+docker-compose run --rm web django-admin
 ```
