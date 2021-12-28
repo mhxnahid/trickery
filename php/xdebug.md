@@ -11,6 +11,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 ```
 `/etc/php/7.4/cli/conf.d/20-xdebug.ini`
 ```
+# xdebug 2 config
 zend_extension=xdebug.so
 xdebug.idekey=VSCODE
 xdebug.remote_autostart = 1
@@ -137,6 +138,7 @@ CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
 ```
 
 ```ini
+# xdebug 3 config. same config can be used for non-docker usage
 # .dockerfiles/xdebug.ini
 zend_extension=xdebug.so
 xdebug.mode=develop,debug
