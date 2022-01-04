@@ -1,3 +1,40 @@
+### programatically register and destroy and recover watchers
+```js
+export default {
+  data() {
+    return {
+      post: {
+        _entity: {},
+        entity_id: "",
+      }
+    };
+  },
+  mounted() {
+    this.fetchRecord();
+  },
+  methods: {
+    entityWatcher(value) {
+      this.post.entity_id = value?.id || "";
+    },
+    fetchRecord() {
+      const unwatchEntity = this.$watch("post._entity", this.entityWatcher); //register
+
+      unwatchEntity(); //destroy
+
+      const data = window.audit;
+
+      this.post = {
+        ...this.post,
+        _entity: data.entity,
+        entity_id: data.entity.id,
+      };
+
+      this.$watch("post._entity", this.entityWatcher); //register
+    },
+  },
+};
+```
+
 ### Shallow copy objects while assigning to data() to avoid mutations
 ```js
 <script>
