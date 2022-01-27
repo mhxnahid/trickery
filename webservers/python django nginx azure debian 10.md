@@ -1,3 +1,6 @@
+### stack
+python 3.9.9, django 4.0, gunicorn, nginx, mssql (docker), pm2
+
 ```bash
 sudo apt update
 sudo apt upgrade
