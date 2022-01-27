@@ -3,7 +3,10 @@ sudo apt update
 sudo apt upgrade
 sudo apt dist-upgrade
 
-apt install ranger htop mc ncdu ufw acl git logrotate fail2ban highlight ca-certificates curl gnupg lsb-release nginx make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+apt install ranger htop mc ncdu ufw acl git logrotate fail2ban highlight\
+ca-certificates curl gnupg lsb-release nginx make build-essential libssl-dev zlib1g-dev\
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncursesw5-dev xz-utils\
+tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
    
 echo   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
 $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
