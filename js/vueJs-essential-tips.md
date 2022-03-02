@@ -1,3 +1,7 @@
+### be careful with global mixin created/mounted methods. These will mount on every component
+
+### custom event listeners this.$root.$on has to be destroyed() using $off([]) method. These don't get cleaned up on component destroyal automatically.
+
 ### programatically register and destroy and recover watchers
 ```js
 export default {
