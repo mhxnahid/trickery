@@ -2,7 +2,7 @@
 
 ## Quirks
 
-##### route-model binding optional parameter
+#### route-model binding optional parameter
 If the optional parameter is not passed, model binding will provide an instance of the Model class. Check using $model->id to check.
 
 ##### `$this->middleware('name')` has to be used within `__construct()` in a controller. It doesn't work in a controller method. Use `Gate::authorize()` or `$this->authorize()`
