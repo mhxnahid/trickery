@@ -20,3 +20,6 @@ Alt+j = Select next occurence
 
 #### Click on the gear icon, then > "Always Select Opened File"
 ![image](https://user-images.githubusercontent.com/45322767/164878671-a111c38e-f8fb-4718-a3a4-f5f08ed4314b.png)
+
+#### Go to Preferences > Keymap, Search for "Save All" in the search box on the right. Find the "Save All" command, right-click on it, remove Cmd-S and add Cmd-Shift-S. It may warn you that this will remove Cmd-Shift-S from another command; click "Remove".
+![image](https://user-images.githubusercontent.com/45322767/164891018-6c8862b2-43f4-41c6-a2f0-85289fcb752b.png)
