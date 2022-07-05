@@ -1,3 +1,10 @@
+#### Wait until 
+```js
+while(!elementLoaded) {
+    await new Promise(r => setTimeout(r, 500));
+}
+```
+
 #### Custom events
 ```js
     window.addEventListener('toast', ({detail}) => {
