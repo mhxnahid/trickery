@@ -1,5 +1,4 @@
-```
-#/etc/vimrc for global
+"/etc/vimrc for global
 start
 :set number
 ":set relativenumber
@@ -13,4 +12,4 @@ start
 " copy and paste
 vnoremap <C-c> "+y
 map <C-v> "+P
-```
+
