@@ -23,3 +23,6 @@ Alt+j = Select next occurence
 
 #### Go to Preferences > Keymap, Search for "Save All" in the search box on the right. Find the "Save All" command, right-click on it, remove Cmd-S and add Cmd-Shift-S. It may warn you that this will remove Cmd-Shift-S from another command; click "Remove".
 ![image](https://user-images.githubusercontent.com/45322767/164891018-6c8862b2-43f4-41c6-a2f0-85289fcb752b.png)
+
+#### Select nex occurence. Delesect is `Alt+Ctrl+J`
+![image](https://user-images.githubusercontent.com/45322767/187012877-e4fc2c9b-08ab-439f-8efa-d93b900ebf48.png)
