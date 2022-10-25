@@ -1,3 +1,5 @@
+### Watchers attached to props will trigger on every [parent] component update if prop is an [object] defined directly on the <child :p="{}"> [SO Question](https://stackoverflow.com/q/63953539/2923388)
+
 ### be careful with global mixin created/mounted methods. These will mount on every component
 
 ### custom event listeners this.$root.$on has to be destroyed() using $off([]) method. These don't get cleaned up on component destroyal automatically.
