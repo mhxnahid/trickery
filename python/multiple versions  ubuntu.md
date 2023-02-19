@@ -10,4 +10,6 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.8 1
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.9 2
 # have fun
 sudo update-alternatives --config python3
+# create venv
+python3 -m venv .venv
 ```
