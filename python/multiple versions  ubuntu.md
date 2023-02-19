@@ -11,5 +11,5 @@ sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/pytho
 # have fun
 sudo update-alternatives --config python3
 # create venv
-python3 -m venv .venv
+/usr/local/bin/python3.9 -m venv .venv
 ```
