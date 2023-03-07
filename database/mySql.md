@@ -10,3 +10,6 @@ timestamp fields can be indexed, datetime not\
 SET group_concat_max_len = 9999999; #Default concat returns limited result
 select group_concat(phone) as ephone from kfh_sms.user_profiles;
 ```
+
+#### MariaDB 10.3.31 timestamp field CURRENT_TIMESTAMP ON_UPDATE quirk
+https://stackoverflow.com/a/58181310/2923388
