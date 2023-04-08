@@ -158,3 +158,7 @@ computed: {
 
 
 ### Transition with v-show [Fiddle](http://jsfiddle.net/eywraw8t/355190/)
+  
+### This causes the second array to repeat 10x!
+ ![image](https://user-images.githubusercontent.com/45322767/230731751-ac172f5e-8a6a-45e3-b68f-b4e71a33eb09.png)
+
