@@ -161,4 +161,9 @@ computed: {
   
 ### This causes the second array to repeat 10x!
  ![image](https://user-images.githubusercontent.com/45322767/230731751-ac172f5e-8a6a-45e3-b68f-b4e71a33eb09.png)
+  
+### remember to return data() function. otherwise it'll fail to read mixin data properties and give errors
+![image](https://user-images.githubusercontent.com/45322767/231359170-145e1d9c-9662-4bea-8d65-dff951b28873.png)
+![image](https://user-images.githubusercontent.com/45322767/231359206-477a9a71-0272-4458-b6ef-e34000deed39.png)
+
 
