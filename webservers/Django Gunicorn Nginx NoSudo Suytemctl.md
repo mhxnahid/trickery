@@ -52,7 +52,7 @@ upstream apex{
 server{
     listen 80;
 
-    server_name apex-security.friendstech.net;
+    server_name apex-security.class.net;
 
     location / {
         proxy_pass  http://apex;
