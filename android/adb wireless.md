@@ -1,4 +1,4 @@
-Android 11+
+##### Android 11+
 ```bash
 # enable wireless debug. go in to find your ip:port
 adb pair 192.168.0.112:42677
