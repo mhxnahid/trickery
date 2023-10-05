@@ -1,3 +1,23 @@
+# zombie
+```bash
+#$ ps -u azureuser u
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+azureus+   722  0.0  1.3 904268 52968 ?        Ssl  Jun01   8:18 PM2 v5.1.2: God Daemon (/home/azureuser/.pm2)
+azureus+ 11218  0.0  0.0   2496    76 ?        Ss   Aug27   1:22 /bin/tini -- /usr/local/bin/docker-entrypoint.sh eswrapper
+azureus+ 11350  0.0  1.5 2599680 63208 ?       Sl   Aug27  41:46 /usr/share/elasticsearch/jdk/bin/java -Xms4m -Xmx64m -XX:+UseSerialGC -Dcli.name=server -Dcli.script=/usr/share/elasticsearch/bin/elasticsearch -Dcli.libs=lib/tools/server-c
+azureus+ 11536  0.2 16.4 3183844 664044 ?      Sl   Aug27 129:15 /usr/share/elasticsearch/jdk/bin/java -Des.networkaddress.cache.ttl=60 -Des.networkaddress.cache.negative.ttl=10 -Djava.security.manager=allow -XX:+AlwaysPreTouch -Xss1m -Dj
+azureus+ 11557  0.0  0.0 108192   552 ?        Sl   Aug27   0:00 /usr/share/elasticsearch/modules/x-pack-ml/platform/linux-x86_64/bin/controller
+azureus+ 11799  0.0  0.1  10864  4512 ?        Ss   Aug27   0:00 bash -c set -e; cd /home/azureuser/projects/dmtool-core; git pull; . .venv/bin/activate; pip install -r requirements.txt; python manage.py migrate; python manage.py client_m
+azureus+ 12320  0.1  4.0 389288 162624 ?       Sl   Aug27  95:37 python -m celery -A config worker --loglevel=info
+azureus+ 12324  0.0  3.8 320232 155672 ?       S    Aug27   0:00 python -m celery -A config worker --loglevel=info
+azureus+ 12325  0.2  5.8 686564 234576 ?       S    Aug27 149:09 python -m celery -A config worker --loglevel=info
+azureus+ 21193  0.0  0.0  21304  1588 ?        Ss   Jun29   0:00 /lib/systemd/systemd --user
+azureus+ 21194  0.0  0.0 106356  2976 ?        S    Jun29   0:00 (sd-pam)
+azureus+ 21559  0.0  0.1  15772  6400 ?        S    01:07   0:00 sshd: azureuser@pts/0
+azureus+ 21561  0.0  0.2  11580  8208 pts/0    Ss   01:07   0:00 -bash
+azureus+ 23846  0.0  0.0  10628  3096 pts/0    R+   02:26   0:00 ps -u azureuser u
+```
+After killing PID 12320 and doing a pm2 restart (delete+start)
 ```bash
 #$ ps -u azureuser u
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
