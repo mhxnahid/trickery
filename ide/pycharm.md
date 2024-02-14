@@ -26,3 +26,6 @@ Alt+j = Select next occurence
 
 #### Select nex occurence. Delesect is `Alt+Shift+J`
 ![image](https://user-images.githubusercontent.com/45322767/187012877-e4fc2c9b-08ab-439f-8efa-d93b900ebf48.png)
+
+### Comments to respect indent level
+![image](https://github.com/mhxnahid/trickery/assets/45322767/b628ad55-1ad5-4128-8ba1-b8ad7ca9755f)
