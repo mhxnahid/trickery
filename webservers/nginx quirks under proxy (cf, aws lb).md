@@ -1,4 +1,5 @@
 ### to let framework know that https is used (cloudflare in this example)
+#### django
 ```conf
 server{
     listen 80;
@@ -16,4 +17,13 @@ server{
 
     }
 }
+```
+#### php/laravel (https is behind proxy) (this system has no direct public ip)
+```
+ location = /index.php {
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+    fastcgi_param  HTTPS "on";
+  }
 ```
