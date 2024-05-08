@@ -1,5 +1,5 @@
 ### to let framework know that https is used (cloudflare in this example)
-```
+```conf
 server{
     listen 80;
 
